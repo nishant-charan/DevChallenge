@@ -22,7 +22,7 @@ public class DevChallengePrjApplicationTests {
 	}
 	
 	@Test
-	public void testAddNewShop() {
+	public void testAddNewShop() throws Exception {
 		setUp();
 		Integer shopsSize = shopService.shops.size();
 		ShopAddress tobeAddedAddress = new ShopAddress();
@@ -36,11 +36,29 @@ public class DevChallengePrjApplicationTests {
 		Assert.assertEquals("Both Size should be equal", shopsSize + 1, shopService.shops.size());
 	}
 	
+	@Test (expected = Exception.class)
+	public void testAddNewShopForException() throws Exception {
+		setUp();
+		Integer shopsSize = shopService.shops.size();
+		ShopAddress tobeAddedAddress = new ShopAddress();
+		tobeAddedAddress.setNumber("3");
+		ShopDetails tobeAddedShop = new ShopDetails();
+		tobeAddedShop.setShopName("Test3");
+		tobeAddedShop.setShopAddress(tobeAddedAddress);
+		ShopDetails newAddedShop = shopService.addShopDetails(tobeAddedShop);
+	}
+	
 	@Test
-	public void testNearestShop() {
+	public void testNearestShop() throws Exception {
 		setUp();
 		ShopDetails nearestShopDetails = shopService.retrieveNearestShop("25", "82");
 		Assert.assertTrue(nearestShopDetails.getShopName().equals("Test1"));
+	}
+	
+	@Test (expected = Exception.class)
+	public void testNearestShopForException() throws Exception {
+		setUp();
+		ShopDetails nearestShopDetails = shopService.retrieveNearestShop(null, "82");
 	}
 	
 }

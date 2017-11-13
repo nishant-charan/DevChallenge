@@ -2,6 +2,8 @@ package com.nishant.DevChallengePrj.controller;
 
 import java.net.URI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +20,14 @@ import com.nishant.DevChallengePrj.service.ShopService;
 @RestController
 public class ShopController {
 	
+	public static Logger LOG = LoggerFactory.getLogger(ShopController.class);
+	
 	@Autowired
 	private ShopService shopService;
 	
 	@PostMapping("/addNewShop")
-	public ResponseEntity<Void> addNewShop(@RequestBody ShopDetails newShopDetails) {
-
+	public ResponseEntity<Void> addNewShop(@RequestBody ShopDetails newShopDetails) throws Exception {
+		LOG.info("Adding new shop");
 		ShopDetails shopDetails = shopService.addShopDetails(newShopDetails);
 
 		if (shopDetails == null) {
@@ -38,7 +42,7 @@ public class ShopController {
 	
 	@GetMapping("/latitude/{latitude}/longitude/{longitude}")
 	public ShopDetails retrieveNearestShop(@PathVariable String latitude,
-			@PathVariable String longitude) {
+			@PathVariable String longitude) throws Exception {
 		return shopService.retrieveNearestShop(latitude, longitude);
 	}
 
