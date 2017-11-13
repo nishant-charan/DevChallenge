@@ -36,4 +36,11 @@ public class DevChallengePrjApplicationTests {
 		Assert.assertEquals("Both Size should be equal", shopsSize + 1, shopService.shops.size());
 	}
 	
+	@Test
+	public void testNearestShop() {
+		setUp();
+		ShopDetails nearestShopDetails = shopService.retrieveNearestShop("25", "82");
+		Assert.assertTrue(nearestShopDetails.getShopName().equals("Test1"));
+	}
+	
 }
