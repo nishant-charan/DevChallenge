@@ -1,0 +1,18 @@
+INSTRUCTIONS TO RUN THE PROGRAM : 
+1. Change log.home value in resources/application.properties
+2. Run as Java Application DevChallengePrjApplication.java
+3. To add new shop : 
+	POST call using RESTful client using below url : 
+	locahost:8080/addNewShop
+	with body as below
+	{
+		"shopName" : "ShopName",
+		"shopAddress" : 
+		{
+			"number" : "1",
+			"postCode" : "411014"
+		}
+	}
+4. To search for nearest shop use the below url :
+	locahost:8080/latitude/{latitude_value}/longitude/{longitude_value}
+	Replace {latitude_value} and {longitude_value} with the values provided by client for nearest shop search
